@@ -71,11 +71,13 @@ ITEM_PIPELINES = {
    'CoinSpider.pipelines.CoinsMongo': 300,
    #'CoinSpider.pipelines.JsonWritePipline': 300,
 }
-MONGO_HOST = "127.0.0.1"  # 主机IP
-MONGO_PORT = 27017  # 端口号
-MONGO_DB = "Coins"  # 库名
+MONGO_HOST = "192.168.31.102"  # 主机IP
+MONGO_PORT = 1507  # 端口号
+MONGO_DB = "central_crypto_mongo"  # 库名
 MONGO_COLL1 = "CoinUrl"  # collection
 MONGO_COLL2 = "CoinDetails_zh"  # collection
+MONGO_USER="admin"
+MONGO_PASS="Zhongjing12"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

@@ -6,11 +6,11 @@ import requests
 import re
 
 
-username = 
-password = 
+username = urllib.parse.quote_plus('admin')
+password = urllib.parse.quote_plus('Zhongjing12')
 client = pymongo.MongoClient('mongodb://%s:%s@192.168.31.102:1507' % (username, password))
 
-db = 
+db = client['central_crypto_mongo']
 coll_zh = db['CoinDetails_zh']
 coll_hk = db['CoinDetails_hk']
 url = 'https://currency-api.appspot.com/api/CNY/USD.json'

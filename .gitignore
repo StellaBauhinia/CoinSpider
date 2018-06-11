@@ -2,3 +2,7 @@
 crawls/
 settings.py
 __pycache__
+CoinSpider/__pycache__/items.cpython-36.pyc
+*.pyc
+*.pyc
+replicateToFanti.py
