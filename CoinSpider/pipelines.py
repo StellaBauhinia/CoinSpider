@@ -8,7 +8,9 @@ import json
 import pymongo
 from scrapy.conf import settings
 from CoinSpider.items import *
+import os
 
+checkFile = "isRunning.txt"
 class CoinspiderPipeline(object):
     def process_item(self, item, spider):
         return item
@@ -17,8 +19,10 @@ class CoinsMongo(object):
     def __init__(self):
         self.client = pymongo.MongoClient(host=settings['MONGO_HOST'], port=settings['MONGO_PORT'])
         self.db = self.client[settings['MONGO_DB']]
+        f = open(checkFile,"w")
+        f.close()
         self.CoinspiderItem = self.db[settings['MONGO_COLL1']]
-        self.CoinItem = self.db[settings['MONGO_COLL2']]
+        self.CoinItem_zh = self.db[settings['MONGO_COLL2']]
 
     '''def process_item(self, item, spider):
         #postItem = dict(item)
@@ -35,13 +39,13 @@ class CoinsMongo(object):
         return item'''
     def process_item(self, item, spider):
         """ 判断item的类型，并作相应的处理，再入数据库 """
-        if isinstance(item, CoinItem):
+        if isinstance(item, CoinItem_zh):
             try:
-                count = self.CoinItem.find({'english_name': item['english_name']}).count()
+                count = self.CoinItem_zh.find({'english_name': item['english_name']}).count()
                 if count > 0:
-                    self.CoinItem.update({'english_name': item['english_name']}, dict(item))
+                    self.CoinItem_zh.update({'english_name': item['english_name']}, dict(item))
                 else:
-                    self.CoinItem.insert(dict(item))
+                    self.CoinItem_zh.insert(dict(item))
             except Exception as e:
                 print(e)
                 pass
@@ -55,6 +59,12 @@ class CoinsMongo(object):
             except Exception as e:
                 print(e)
                 pass
+
+    def close_spider(self,spider):
+        self.client.close()
+        isFileExist = os.path.isfile(checkFile)
+        if isFileExist:
+            os.remove(checkFile)
 
 # 写入json文件
 '''class JsonWritePipline(object):

@@ -15,10 +15,10 @@ class CoinspiderItem(scrapy.Item):
     name = scrapy.Field()
     pass
 
-class CoinItem(scrapy.Item):
+class CoinItem_zh(scrapy.Item):
 	code = scrapy.Field()
 	english_name = scrapy.Field()
-	chinese_name = scrapy.Field()
+	chinese_name_zh = scrapy.Field()
 	exchanger_count = scrapy.Field()
 	publish_time = scrapy.Field()
 	publish_name = scrapy.Field()
@@ -27,7 +27,7 @@ class CoinItem(scrapy.Item):
 	block_explorer = scrapy.Field()
 	is_token = scrapy.Field()
 	ico_price = scrapy.Field()
-	description = scrapy.Field()
+	description_zh = scrapy.Field()
 	market_capitalization = scrapy.Field()  # 流通市值
 	publish_count = scrapy.Field()  # 发行量
 	market_count = scrapy.Field()  # 流通量
