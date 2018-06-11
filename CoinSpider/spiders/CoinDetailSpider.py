@@ -9,6 +9,7 @@ from scrapy.conf import settings
 from scrapy import Spider, Selector
 from scrapy.http import Request
 from CoinSpider.items import *
+import urllib.parse
 
 class CoinDetailSpider(Spider):
     name = 'CoinDetailSpider'
@@ -19,7 +20,9 @@ class CoinDetailSpider(Spider):
     start_urls = [
         #'http://www.feixiaohao.com/all/'
     ]
-    client = pymongo.MongoClient(host=settings['MONGO_HOST'], port=settings['MONGO_PORT'])
+    username = urllib.parse.quote_plus(settings['MONGO_USER'])
+    password = urllib.parse.quote_plus(settings['MONGO_PASS'])
+    client = pymongo.MongoClient('mongodb://%s:%s@192.168.31.102:1507' % (username, password))
     db = client[settings['MONGO_DB']]
     url_coll = db[settings['MONGO_COLL1']]
     for sub_url in url_coll.find({}):

@@ -11,6 +11,7 @@ checkFile = "isRunning.txt"  # 爬虫是否在运行的标志
 startTime = datetime.now()
 print(f"startTime = {startTime}")
 
+
 i = 0
 miniter = 0
 while True:
@@ -37,3 +38,4 @@ while True:
     miniter += 10
     if miniter >= 1440:    # 等待满24小时，自动退出监控脚本
         break
+
