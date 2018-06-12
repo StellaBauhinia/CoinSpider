@@ -6,9 +6,9 @@ import requests
 import re
 
 
-username = urllib.parse.quote_plus('admin')
-password = urllib.parse.quote_plus('Zhongjing12')
-db_name = urllib.parse.quote_plus('central_crypto_mongo')
+username = 
+password = 
+db_name = 
 client = pymongo.MongoClient('mongodb://%s:%s@192.168.31.102:1507' % (username, password))
 
 db = client['central_crypto_mongo']
