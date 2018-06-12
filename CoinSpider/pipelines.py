@@ -21,10 +21,11 @@ class CoinsMongo(object):
         #self.client = pymongo.MongoClient(host=settings['MONGO_HOST'], port=settings['MONGO_PORT'],username=settings['MONGO_USER'],passowrd=settings['MONGO_PASS'])
         username = urllib.parse.quote_plus(settings['MONGO_USER'])
         password = urllib.parse.quote_plus(settings['MONGO_PASS'])
+        db_name = urllib.parse.quote_plus(settings['MONGO_DB'])
         #host = urllib.parse.quote_plus(settings['MONGO_HOST'])
         #port = urllib.parse.quote_plus(str(settings['MONGO_PORT']))
         #print(uri)
-        self.client = pymongo.MongoClient('mongodb://%s:%s@192.168.31.102:1507' % (username, password))
+        self.client = pymongo.MongoClient('mongodb://%s:%s@192.168.31.102:1507/%s' % (username, password,db_name))
         self.db = self.client[settings['MONGO_DB']]
         f = open(checkFile,"w")
         f.close()

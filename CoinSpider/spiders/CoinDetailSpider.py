@@ -22,7 +22,8 @@ class CoinDetailSpider(Spider):
     ]
     username = urllib.parse.quote_plus(settings['MONGO_USER'])
     password = urllib.parse.quote_plus(settings['MONGO_PASS'])
-    client = pymongo.MongoClient('mongodb://%s:%s@192.168.31.102:1507' % (username, password))
+    db_name = urllib.parse.quote_plus(settings['MONGO_DB'])
+    client = pymongo.MongoClient('mongodb://%s:%s@192.168.31.102:1507/%s' % (username, password,db_name))
     db = client[settings['MONGO_DB']]
     url_coll = db[settings['MONGO_COLL1']]
     for sub_url in url_coll.find({}):
